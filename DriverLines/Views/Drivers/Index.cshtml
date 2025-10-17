@@ -1,0 +1,157 @@
+﻿@model IEnumerable<DriverLines.Data.Tables.Drivers>
+
+@{
+    ViewData["Title"] = "قائمة السواق";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        direction: rtl;
+        font-family: 'Cairo', sans-serif;
+        background-color: #f6f8fb;
+    }
+
+    .container-custom {
+        max-width: 1150px;
+        margin: 60px auto;
+        background: #fff;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+        color: #182848;
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 30px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(90deg, #4b6cb7, #182848);
+        border: none;
+        padding: 10px 30px;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #182848, #4b6cb7);
+        }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    thead {
+        background: linear-gradient(90deg, #182848, #4b6cb7);
+        color: #fff;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+        vertical-align: middle;
+    }
+
+    tr:hover {
+        background-color: #f1f4ff;
+        transition: 0.2s;
+    }
+
+    .badge-active {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 12px;
+        font-size: 13px;
+    }
+
+    .badge-inactive {
+        background-color: #f44336;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 12px;
+        font-size: 13px;
+    }
+
+    .actions a {
+        text-decoration: none;
+        margin: 0 5px;
+        font-weight: 600;
+    }
+
+    .edit {
+        color: #1565c0;
+    }
+
+    .details {
+        color: #512da8;
+    }
+
+    .delete {
+        color: #d32f2f;
+    }
+
+</style>
+
+<div class="container-custom">
+    <h1>🚘 قائمة السواق</h1>
+
+    <div class="text-center mb-4">
+        <a asp-action="Create" class="btn btn-primary">➕ إضافة سائق جديد</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>الاسم</th>
+                <th>رقم الهاتف</th>
+                <th>نوع السيارة</th>
+                <th>رقم السيارة</th>
+                <th>الركاب</th>
+                <th>تبريد</th>
+                <th>نوع الخط</th>
+                <th>رمز الخط</th>
+                <th>الحالة</th>
+                <th>إجراءات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.DriverName</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.VehicleType</td>
+                    <td>@item.VehicleNumber</td>
+                    <td>@item.RemainingSeats / @item.TotalSeats</td>
+                    <td>@(item.HasAC ? "❄️ نعم" : "🔥 لا")</td>
+                    <td>@item.LineType</td>
+                    <td>@item.LineCode</td>
+                    <td>
+                        @if (item.IsActive)
+                        {
+                            <span class="badge-active">نشط</span>
+                        }
+                        else
+                        {
+                            <span class="badge-inactive">متوقف</span>
+                        }
+                    </td>
+                    <td class="actions">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="edit">تعديل</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id" class="details">تفاصيل</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="delete">حذف</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

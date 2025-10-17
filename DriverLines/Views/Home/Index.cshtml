@@ -1,0 +1,170 @@
+﻿@{
+    ViewData["Title"] = "الصفحة الرئيسية";
+    Layout = "_Layout";
+}
+
+<style>
+    body {
+        direction: rtl;
+        font-family: 'Cairo', sans-serif;
+        margin: 0;
+        background: linear-gradient(135deg, #f6f7fb, #ffffff);
+        color: #333;
+    }
+
+    /* شريط علوي */
+    nav {
+        background-color: #4b6cb7;
+        background-image: linear-gradient(to right, #182848, #4b6cb7);
+        padding: 15px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #fff;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+        nav h2 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+            nav a:hover {
+                color: #d0e2ff;
+            }
+
+    /* منطقة المقدمة */
+    .hero {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 80vh;
+        padding: 0 20px;
+    }
+
+        .hero h1 {
+            color: #182848;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            color: #555;
+            font-size: 18px;
+            line-height: 1.8;
+            width: 60%;
+            margin: 0 auto 30px;
+        }
+
+        .hero a {
+            background-color: #4b6cb7;
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(75, 108, 183, 0.3);
+            transition: 0.3s;
+        }
+
+            .hero a:hover {
+                background-color: #3655a4;
+                transform: scale(1.05);
+            }
+
+    /* كروت صغيرة */
+    .features {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        flex-wrap: wrap;
+        padding: 60px 20px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        padding: 25px;
+        width: 280px;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .card h3 {
+            color: #4b6cb7;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+    /* الفوتر */
+    footer {
+        background-color: #182848;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        margin-top: 50px;
+    }
+</style>
+
+<nav>
+    <h2>DriverLines</h2>
+    <div>
+        <a href="/">الرئيسية</a>
+        <a href="/Drivers">قائمة السواق</a>
+        <a href="/Identity/Account/Login">تسجيل الدخول</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>مرحباً بك في سريع 🚘</h1>
+    <p>
+        منصة تكاملة لإدارة بيانات السائقين والمركبات بسهولة واحترافية.
+        تجربة مستخدم عصرية وسلسة لمتابعة التفاصيل وتنظيم العمل اليومي بكل دقة وأناقة.
+    </p>
+    <a href="/Drivers">عرض قائمة السواق</a>
+</section>
+
+<section class="features">
+    <div class="card">
+        <h3>📋 إدارة السائقين</h3>
+        <p>أضف، عدّل، واحذف بيانات السائقين بسهولة من خلال لوحة تحكم متطورة.</p>
+    </div>
+    <div class="card">
+        <h3>🚗 تنظيم المركبات</h3>
+        <p>تابع تفاصيل السيارات المرتبطة بكل سائق وحدث البيانات أولاً بأول.</p>
+    </div>
+    <div class="card">
+        <h3>📊 تقارير دقيقة</h3>
+        <p>احصل على نظرة شاملة لتفاصيل العمل من خلال عرض الإحصاءات والتقارير.</p>
+    </div>
+</section>
+
+<footer>
+2
+</footer>
