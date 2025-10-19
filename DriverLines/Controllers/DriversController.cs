@@ -20,9 +20,20 @@ namespace DriverLines.Controllers
         }
 
         // GET: Drivers
-        public async Task<IActionResult> Index()
+        public IActionResult Index(string searchTerm)
         {
-            return View(await _context.Dravers.ToListAsync());
+            var drivers = _context.Dravers.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                drivers = drivers.Where(d =>
+                    d.DriverName.Contains(searchTerm) ||
+                    d.PhoneNumber.Contains(searchTerm) ||
+                    d.VehicleType.Contains(searchTerm) ||
+                    d.VehicleNumber.Contains(searchTerm));
+            }
+
+            return View(drivers.ToList());
         }
 
         // GET: Drivers/Details/5

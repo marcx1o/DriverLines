@@ -1,0 +1,45 @@
+﻿@model IEnumerable<DriverLines.Data.Tables.Drivers>
+
+@{
+    ViewData["Title"] = "بحث عن السواق";
+    Layout = "_Layout";
+}
+
+<h2 style="text-align:center; color:#4b6cb7;">بحث عن السواق</h2>
+
+<form asp-action="Search" method="get" style="margin: 30px auto; width: 60%; text-align:center;">
+    <input type="text" name="DriverName" placeholder="اسم السائق" class="form-control" style="margin-bottom:10px;" />
+    <input type="text" name="VehicleNumber" placeholder="رقم السيارة" class="form-control" style="margin-bottom:10px;" />
+    <input type="text" name="Area" placeholder="المنطقة" class="form-control" style="margin-bottom:10px;" />
+    <input type="text" name="LineCode" placeholder="رمز الخط" class="form-control" style="margin-bottom:10px;" />
+    <button type="submit" class="btn btn-primary">بحث</button>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered table-striped" style="width:80%; margin:auto;">
+        <thead style="background:#4b6cb7; color:white;">
+            <tr>
+                <th>اسم السائق</th>
+                <th>رقم السيارة</th>
+                <th>المنطقة</th>
+                <th>رمز الخط</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var driver in Model)
+            {
+                <tr>
+                    <td>@driver.DriverName</td>
+                    <td>@driver.VehicleNumber</td>
+                    <td>@driver.Areas</td>
+                    <td>@driver.LineCode</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p style="text-align:center; color:gray;">لا توجد نتائج مطابقة.</p>
+}

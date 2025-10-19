@@ -11,7 +11,9 @@ namespace DriverLines.Data
         {
         }
         public DbSet<Drivers> Dravers { get; set; } = default;
+        public DbSet<Search> Search { get; set; } = default;
+        public DbSet<Line> Line { get; set; } = default;
 
-        
+
     }
 }

@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "نتائج البحث";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        direction: rtl;
+        font-family: 'Cairo', sans-serif;
+        background-color: #f6f8fb;
+    }
+
+    .container-custom {
+        max-width: 1100px;
+        margin: 50px auto;
+        background: #fff;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+        color: #182848;
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 30px;
+    }
+
+    h2 {
+        color: #4b6cb7;
+        margin-top: 30px;
+        border-bottom: 2px solid #e3e6f0;
+        padding-bottom: 8px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    thead {
+        background: linear-gradient(90deg, #182848, #4b6cb7);
+        color: #fff;
+    }
+
+    th, td {
+        padding: 10px 14px;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+    }
+
+    tr:hover {
+        background-color: #f3f5ff;
+    }
+
+    .no-results {
+        text-align: center;
+        color: #888;
+        margin-top: 30px;
+        font-size: 16px;
+    }
+</style>
+
+<div class="container-custom">
+    <h1>🔍 نتائج البحث عن: <span style="color:#4b6cb7;">@ViewBag.Keyword</span></h1>
+
+    <!-- نتائج السواق -->
+    @if (ViewBag.DriverResults != null && ViewBag.DriverResults.Count > 0)
+    {
+        <h2>🚘 السائقين</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>الاسم</th>
+                    <th>الهاتف</th>
+                    <th>نوع السيارة</th>
+                    <th>رقم السيارة</th>
+                    <th>المناطق</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var d in ViewBag.DriverResults)
+                {
+                    <tr>
+                        <td>@d.DriverName</td>
+                        <td>@d.PhoneNumber</td>
+                        <td>@d.VehicleType</td>
+                        <td>@d.VehicleNumber</td>
+                        <td>@d.Areas</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <!-- نتائج الخطوط -->
+    @if (ViewBag.LineResults != null && ViewBag.LineResults.Count > 0)
+    {
+        <h2>🛣️ الخطوط</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>المنطقة</th>
+                    <th>نوع السيارة</th>
+                    <th>رقم السيارة</th>
+                    <th>عدد المقاعد</th>
+                    <th>تكييف</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var l in ViewBag.LineResults)
+                {
+                    <tr>
+                        <td>@l.Area</td>
+                        <td>@l.VehicleType</td>
+                        <td>@l.VehicleNumber</td>
+                        <td>@l.TotalSeats</td>
+                        <td>@(l.HasAC ? "❄️ نعم" : "🔥 لا")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    @if ((ViewBag.DriverResults == null || ViewBag.DriverResults.Count == 0)
+        && (ViewBag.LineResults == null || ViewBag.LineResults.Count == 0))
+    {
+        <p class="no-results">🚫 لم يتم العثور على أي نتائج.</p>
+    }
+</div>

@@ -1,7 +1,7 @@
-﻿@model IEnumerable<DriverLines.Data.Tables.Drivers>
+﻿@model IEnumerable<DriverLines.Data.Tables.Line>
 
 @{
-    ViewData["Title"] = "قائمة السواق";
+    ViewData["Title"] = "قائمة الخطوط";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -98,15 +98,14 @@
     .delete {
         color: #d32f2f;
     }
-
 </style>
 
 <div class="container-custom">
-    <h1>👥 قائمة السواق</h1>
+    <h1>🚘 قائمة الخطوط</h1>
     <div class="text-center mb-4">
         <form asp-action="Index" method="get" class="d-flex justify-content-center align-items-center">
             <input type="text" name="searchString" value="@ViewBag.CurrentFilter"
-                   placeholder="🔍 ابحث عن ساىق..."
+                   placeholder="🔍 ابحث عن خط، نوع السيارة،..."
                    class="form-control"
                    style="width: 300px; border-radius: 25px; margin-left: 10px; padding: 10px;" />
             <button type="submit" class="btn btn-primary" style="border-radius: 25px;">
@@ -116,46 +115,33 @@
     </div>
 
     <div class="text-center mb-4">
-        <a asp-action="Create" class="btn btn-primary">➕ إضافة سائق جديد</a>
+        <a asp-action="Create" class="btn btn-primary">➕ إضافة خط جديد</a>
     </div>
 
     <table>
         <thead>
             <tr>
-                <th>الاسم</th>
-                <th>رقم الهاتف</th>
+                <th>اسم المنطقة</th>
                 <th>نوع السيارة</th>
                 <th>رقم السيارة</th>
-                <th>الركاب</th>
-                <th>تبريد</th>
-                <th>نوع الخط</th>
-                <th>رمز الخط</th>
-                <th>الحالة</th>
-                <th>إجراءات</th>
+                <th>عدد المقاعد</th>
+                <th>التبريد</th>
+                <th>الملاحظات</th>
+                <th>رقم الهاتف</th>
+                <th>الإجراءات</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.DriverName</td>
-                    <td>@item.PhoneNumber</td>
+                    <td>@item.Area</td>
                     <td>@item.VehicleType</td>
                     <td>@item.VehicleNumber</td>
-                    <td>@item.RemainingSeats / @item.TotalSeats</td>
-                    <td>@(item.HasAC ? "❄️ نعم" : "🔥 لا")</td>
-                    <td>@item.LineType</td>
-                    <td>@item.LineCode</td>
-                    <td>
-                        @if (item.IsActive)
-                        {
-                            <span class="badge-active">نشط</span>
-                        }
-                        else
-                        {
-                            <span class="badge-inactive">متوقف</span>
-                        }
-                    </td>
+                    <td>@item.Capacity</td>
+                    <td>@(item.Cooling ? "❄️ نعم" : "🔥 لا")</td>
+                    <td>@item.Notes</td>
+                    <td>@item.Phone</td>
                     <td class="actions">
                         <a asp-action="Edit" asp-route-id="@item.Id" class="edit">تعديل</a> |
                         <a asp-action="Details" asp-route-id="@item.Id" class="details">تفاصيل</a> |
